@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
-    </style>
+   
     <div class="page-header">
         <h3>!Bienvenido <%= Session["Name"]%>!</h3>
     </div>
@@ -55,8 +54,8 @@
 
 
     <div class="panel panel-info" runat="server">
-        <div class="panel-heading">
-            <span class="" aria-hidden="true"></span>
+         <div class="panel-heading">
+            <span class="" aria-hidden="true"></span>PRODUCTOS      
         </div>
 
 
@@ -64,13 +63,26 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3" aria-label="Button group with nested dropdown">
+                        <label for="nombre">Linea</label>
+                        <asp:DropDownList ID="ddl_Productline" runat="server" class="form-control"></asp:DropDownList>
+                    </div>
+                    <br />
 
-                        <asp:LinkButton ID="Insertar" runat="server" CssClass="btn btn-warning btn-block"><span class="glyphicon glyphicon-car" aria-hidden="true"></span>Ver pedido</asp:LinkButton>
 
+
+                    <div class="form-group col-sm-2">
+                        <asp:LinkButton ID="lbtnSearchP" SkinID="search" runat="server" OnClick="ProductsFilter" CssClass="btn btn-outline-secondary"><i class="glyphicon glyphicon-search"></i></asp:LinkButton>
+                        <%--<button type="button" class="btn btn-primary" ID="btn_SearchLine"  runat="server" cssclass="btn btn-warning btn-block"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>--%>
+                        <%--<asp:LinkButton ID="lbtn_SearchLine" runat="server" CssClass="btn btn-warning btn-block"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></asp:LinkButton>--%>
                     </div>
                 </div>
+
+
+
             </div>
+
+
             <div class="table-responsive">
                 <asp:HiddenField ID="HiddenField2" runat="server" />
                 <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -92,19 +104,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>
-                                <div class="input-group">
-                                    <input type="number" runat="server" value="1" class="input-qty form-control text-center" style="display: block;">
-                                </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-
+                        <asp:Repeater ID="tableValue" runat="server">
+                            <ItemTemplate>
+                                <tr>
+                                     <td><%#Eval("codprod")%></td>
+                                     <td><%#Eval("nomprod")%></td>
+                                     <td><%#Eval("valprod")%></td>                                    
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" runat="server" min="1" value="1" class="input-qty form-control text-center" style="display: block;">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="btn_editar" SkinID="add" runat="server" CssClass="btn btn-outline-secondary"><i class="glyphicon glyphicon-shopping-cart"></i></asp:LinkButton>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </tbody>
                 </table>
 

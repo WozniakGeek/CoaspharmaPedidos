@@ -8,13 +8,45 @@ using System.Web.UI.WebControls;
 
 namespace Coaspharma_Pedidos.Aplication
 {
-    public partial class Customer : System.Web.UI.Page
+    public partial class Seller : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                loaddeposit();
+                loadDrugstore();
+
+            }
+
+        }
+
+        protected void loadDrugstore()
+        {
+            var conexion = new RequestSQL();
+            try
+            {
+                var ListDrugStore = conexion.GetDrugStore();
+                if (ListDrugStore.Count > 0)
+                {
+                    tableValueSeller.DataSource = ListDrugStore.ToList();
+                }
+                tableValueSeller.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected void DrugstoreShow(object sender, EventArgs e)
+        {
+            try
+            {
+                showDrugstore.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
 
         }
@@ -51,9 +83,9 @@ namespace Coaspharma_Pedidos.Aplication
         }
 
         protected void ProductsFilter(object sender, EventArgs e)
-         {
+        {
 
-                                                                                 
+
             var conexion = new RequestSQL();
             var selectLine = ddl_Productline.SelectedValue;
             try
@@ -71,5 +103,38 @@ namespace Coaspharma_Pedidos.Aplication
             }
 
         }
+
+
+
+        protected void takeorder(object sender, EventArgs e)
+        {
+
+            try
+            {
+                string idDrugstore = "";
+                string NameDrugstore = "";
+                string Zone = "";
+                string[] parametros = ((LinkButton)sender).CommandArgument.Split(',');
+                if (!String.IsNullOrEmpty(parametros[0]))
+                {
+                    idDrugstore = parametros[0];
+                    NameDrugstore = parametros[1];
+                    Zone = parametros[2];
+                }
+                showDrugstore.Visible = false;
+                pnl_Order.Visible = true;
+                loaddeposit();
+                txt_NameDrugstore.Text = idDrugstore + " - " + NameDrugstore;
+                txt_zone.Text = Zone;
+                pnl_products.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
     }
 }

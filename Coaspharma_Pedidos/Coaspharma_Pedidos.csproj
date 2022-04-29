@@ -151,6 +151,7 @@
     <Content Include="About.aspx" />
     <Content Include="Aplication\Customer.aspx" />
     <Content Include="Aplication\Login.aspx" />
+    <Content Include="Aplication\Seller.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -2000,6 +2001,13 @@
     </Compile>
     <Compile Include="Aplication\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aplication\Seller.aspx.cs">
+      <DependentUpon>Seller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aplication\Seller.aspx.designer.cs">
+      <DependentUpon>Seller.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
